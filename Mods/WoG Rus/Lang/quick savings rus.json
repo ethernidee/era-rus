@@ -1,0 +1,9 @@
+{
+  "eqs": {
+    "this_day_savegame_name": "@day@_@player@",
+    "end_turn_autosave_name": "@day@_@player@_Конец",
+    "quicksave_name":         "@day@_@player@_Быстрая",
+    "saved_msg":              "Сохранено!",
+    "quicksaved_msg":         "Быстрое сохранение!"
+  }
+}

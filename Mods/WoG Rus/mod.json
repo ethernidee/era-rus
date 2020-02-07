@@ -1,0 +1,35 @@
+{
+	"caption": {
+		"Cn_Simp": "",
+		"en_US": "WoG Russification",
+		"ru_RU": "Русификация «Во Имя Богов»"
+	},
+	"description": {
+		"full": {
+			"Cn_Simp": "",
+			"en_US": "description.txt",
+			"ru_RU": "description_rus.txt"
+		},
+		"short": {
+			"Cn_Simp": "",
+			"en_US": "",
+			"ru_RU": ""
+		}
+	},
+	"author": "Sir Four, Qwertyus and others",
+	"homepage": "http://wforum.heroes35.net/",
+	"icon": {
+		"file": "wog_rus.ico",
+		"index": 0
+	},
+	"mod_version": "2.8.3",
+	"priority": 0,
+	"compatibility": {
+		"class": "all",
+		"entries": {}
+	},
+	"platform": "era",
+	"info_version": "2.8.3",
+	"plugins": {},
+	"category": ""
+}
