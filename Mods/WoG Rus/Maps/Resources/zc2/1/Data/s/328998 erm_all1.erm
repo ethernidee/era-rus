@@ -36,8 +36,8 @@ Variable customization
 *** Init the game ***
 *********************
 *String
-!#Vrz2:S^^;
-!#Vrz11:S^^; a one name variable
+!#VRz2:S^^;
+!#VRz11:S^^; a one name variable
 
 ! #VRz397:S^%Z199\21a.bmp^; portrait for external dialogue
 !#VRz398:S^%Z198_bl.pcx^; large pcx of the heroes in short name

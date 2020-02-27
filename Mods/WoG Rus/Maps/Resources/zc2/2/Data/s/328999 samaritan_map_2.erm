@@ -4,6 +4,7 @@ ERMS_ScriptDate=31.7(July).2006
 *** Save Behemoth
 *** Dummy init
 !#UN:P5/0;
+!#UN:J3/^:clear:^;
 !#VRz400:S^Каненгем^;
 
 *** Init for external graphics (From map 1)
