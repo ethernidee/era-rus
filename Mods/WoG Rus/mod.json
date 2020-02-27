@@ -22,14 +22,14 @@
 		"file": "wog_rus.ico",
 		"index": 0
 	},
-	"mod_version": "2.8.3",
+	"mod_version": "2.9.12",
 	"priority": 0,
 	"compatibility": {
 		"class": "all",
 		"entries": {}
 	},
 	"platform": "era",
-	"info_version": "2.8.3",
+	"info_version": "2.9.12",
 	"plugins": {},
 	"category": ""
 }

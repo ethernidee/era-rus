@@ -1,0 +1,162 @@
+ZVSE
+!?OB29/28/0;
+!!VRz304:S^Рыболовный колодец^;
+!!OB29/28/0:H304;
+[Clear flags 1-3]
+!!IF:R1110000000;
+[Ask if hero wishes to fish in the well]
+!!IF:Q3^Вы хотите остановиться поудить рыбу из колодца?^;
+!!HE-1:W>0; [Check if hero has any movement points left]
+!!IF&3/-1:M^Вы слишком устали, что бы рыбачить сегодня. Попробуйте сделать это завтра.^;
+
+!!FU1100&3/1:P;  [If hero has enough movement and wishes to fish, call function 1100]
+
+!!HE-1&3:W0;  [Reduce hero's remaining movement points to 0 if he/she stopped to fish]
+
+------------------------------------------------------------------------------------------
+
+!?FU1100;  [Start of well fishing Function]
+
+!!VRy1:S25 T99;   [y1 = random # from 25-124]
+!!VRy1::25;            [Divide result by 25 to get # from 1-4]
+
+!!FU1101&y1=1:P; [If y = 1, call function 1101 - obscure result]
+!!FU1102&y1=2:P; [If y = 2, call function 1102 - loose coins]
+!!FU1103&y1=3:P; [If y = 3, call function 1103 - iron chest]
+!!FU1104&y1=4:P; [If y = 4, call function 1104 - monster]
+
+------------------------------------------------------------------------------------------
+
+!?FU1101;  [Start of obscure fishing result Function]
+
+!!VRz301:S^После нескольких часов ты нашел там только^;
+!!VRz302:S^на дне колодца^;
+!!VRy1:S0 T24; [y1 = random # from 0-24]
+
+!!IF&y1=0:M^%Z301 воду и промокший бутерброд с сыром %Z302.^;
+!!IF&y1=1:M^%Z301 воду и старый вонючий ботинок %Z302.^;
+!!IF&y1=2:M^%Z301 вода и старый ржавый меч %Z302.^;
+!!IF&y1=3:M^%Z301 воду и кусок гнилого мяса %Z302.^;
+!!IF&y1=4:M^%Z301 вонючую воду и тину %Z302.^;
+!!IF&y1=5:M^%Z301 пузырящуюся воду и много замшелых булыжников %Z302.^;
+!!IF&y1=6:M^После нескольких часов ты вытащил большую форель и собираешься приготовить ее на ужин.^;
+!!IF&y1=7:M^Ты начал ловить рыбу, и неожиданно почувствовал, что проваливаешься в темную глубокую дыру. Несколько часов спустя ты вывалился из нее в том же месте!^;
+!!IF&y1=8:M^После целого дня рыбалки ты выловил из воды маленькую русалку. Она пела тебе, пока ты не заснул, а когда проснулся - она уже слиняла.^;
+!!IF&y1=9:M^Ты ловишь рыбу и ловишь рыбу и ловишь рыбу и ловишь рыбу и ловишь рыбу и ловишь рыбу и ловишь рыбу. Тебе уже до смерти надоела эта рыбная ловля.^;
+!!IF&y1=10:M^Ты пытаешься поймать хоть что-то в течение долгого времени, но в конце концов отступаешь. Но только тогда, когда наглая рыба сжирает твоего последнего червяка.^;
+!!IF&y1=11:M^Пока ты ловишь рыбу, ты развлекаешься тем, что громко орешь и слушаешь эхо. Это дставляет удовольствие, пока эхо не посылает тебя к черту.^;
+!!IF&y1=12:M^Ты провел замечательное время, ловя рыбу и распевая песни о храбрых героях, злых драконах, и мудрых магах.^;
+!!IF&y1=13:M^День нынче жаркий, так что ты решил выкупаться. И правильно - воды в колодце по шею, так что все равно бы ничего не поймал.^;
+!!IF&y1=14:M^В процессе ловли ты вытащил из колодца старый и очень тяжелый якорь. Кто бы мог подумать, что здесь не только плавало судно, но и ЗАТОНУЛО?!^;
+!!IF&y1=15:M^Рыбалка тебе быстро наскучила, так что вы просто решили окунуться.^;
+!!IF&y1=16:M^Рыбалка тебе надоела, и ты решил лучше поиграть и нарвать яблок.^;
+!!IF&y1=17:M^После непродолжительного сидения с удочкой ты вытащил электрического угря. Лучше б ты ничего не поймал!^;
+!!IF&y1=18:Q1/8/6/1^Ты рыбачил до поздней ночи, пока комары наконец не загнали тебя в палатку.^;
+
+!!IF&y1=19:Q1/14/1/1^После многих часов сидения ты вытащил чудную радужную рыбку. С луком оказалась превосходной закуской под "Гжелку"! Так что это подняло мораль твоей армии.^;
+!!HE-1&y1=19:R0/d1; [Give +1 temporary morale to hero]
+
+!!IF&y1=20:Q1/8/2/1^После нескольких часов рыбалки ты вытащил какую-то штуку, в которой с удивлением узнал Грааль!^;
+!!IF&y1=20:M^Но после некоторого времени ты понял, что это были глюки. Xорошо, что твои ребята сумели привести тебя в чувство!^;
+
+!!VRy2&y1=21:S2 T8; [Set y2 to random # between 2 and 10]
+!!VRy3&y1=21:S0 -y2 -100000; [Create a negative number for message display purposes]
+!!IF&y1=21:Q1/36/y3/1^Ты долго рыбачил, время от времени бросая в колодец монетку и загадывая желание. В конце дня ты с удивлением понял, что выкинул в эту чертову дыру {%Y2} {золотых}!^;
+!!VRy2&y1=21:*-1;     [Change number to a negative number]
+!!OW&y1=21:R-1/6/dy2; [Remove 1 to 10 gold from player]
+
+!!IF&y1=22:Q1/16/1/1^Через несколько часов начался дождь, и вся твоя армия насквозь промокла. Все отправились спать в очень жалком виде.^;
+!!HE-1&y1=22:R0/d-1; [Reduce morale by 1]
+
+!!IF&y1=23:Q500/21/16/1^После нескольких часов тупого сидения с удочкой ты с удивлением увидел группу гномов, которые громко пели
+
+"{Xей-хо, хей-хо,}
+{мы наконец-то идем домой.}"^;
+
+!!VRy2&y1=24:S0 T69;  [Generate random # from 0-69 for spell - put in y2]
+!!UN&y1=24:N1/z301/y2; [Assign spell name to z301]
+!!IF&y1=24:Q1/9/y2/1^Ты рыбачил весь день, и в конце концов тебе явился очень сексуальный водяной дух, и научил тебя заклинанию.
+"{Используй} {заклинание} {%Z301} {чтобы} {досадить} {врагам},"
+сказал дух, перед тем как исчезнуть.^;
+!!HE-1&y1=24:My2/1; [Give spell to hero]
+
+------------------------------------------------------------------------------------------
+
+!?FU1102;  [Start of loose coins result Function]
+
+!!VRy1:S3 T97;    [Set y1 to random # from 3-100]
+!!IF:Q1/36/y1/1^Во время рыбалки ты выловил со дна несколько потерянных кем-то монеток.^;
+!!OW:R-1/6/dy1;  [Give player 3 to 100 gold]
+
+------------------------------------------------------------------------------------------
+
+!?FU1103;  [Start of iron chest result Function]
+
+!!VRy1:S1 T4;  [Set y1 to random number from 1-5]
+
+!!IF:Q2^Ты провел с удочкой весь день. И вытащил какой-то старый сундук.
+
+Откроешь?^;
+
+!!VRy1&-2:S0; [If chest isn't opened, set y1 to 0]
+
+!!IF&y1=0:M^Ты бросил закрытый сундук обратно в колодец. Получился большой *ПЛЮX*!^;
+
+ [Empty chest: y1=1]
+!!IF&y1=1:M^К большому сожалению, сундук просто пуст.^;
+
+ [Chest contains gold: y1=2]
+!!VRy2&y1=2:S1 T7 *100; [Set y2 to random number from 100 to 800]
+!!IF&y1=2:Q1/6/y2/1^В сундуке ты нашел
+
+{%Y2 золотых!}^;
+!!OW&y1=2:R-1/6/dy2;  [Give player gold]
+
+ [Chest contains resources: y1=3]
+!!VRy2&y1=3:S0 T3; [Set y2 to random number from 0 to 3 -- resource type]
+!!VRy3&y1=3:S3 T7; [Set y2 to random number from 3 to 8 -- resource amount]
+!!IF&y1=3:Q1/y2/y3/1^Внутри сундука ты нашел кое-то полезное!^;
+!!OW&y1=3:R-1/y2/dy3; [Give player resources]
+
+ [Chest contains artifact: y1=4]
+!!VRy2&y1=4:S7 T110;  [Set y2 to random number from 7 to 117 -- artifact number]
+!!VRy2&y1=4/y2>=86/y2<=90:S7 T78;  [If artifact is a magic Tome or Boots of Levitation, choose a new artifact]
+!!VRy2&y1=4/y2=72:S7 T64; [If artifact is Angel Wings, choose a new one]
+!!HE-1&y1=4:Ay2;       [Give hero artifact #y2]
+!!IF&y1=4:Q2/8/y2/1^В сундуке ты нашел волшебный артефакт!^;
+
+ [Chest contains trap: y1=5]
+!!HE-1&y1=5:B0/?z303;    [Store hero's name in z303]
+!!VRy2&y1=5:S0 T6;  [Set y2 to random number from 0 to 6 -- army slot number]
+!!VRy3&y1=5:S1 T4;  [Set y3 to random number from 1 to 4 -- number of darts]
+!!HE-1&y1=5:C0/y2/d0/?y4; [Store # of monsters found in hero's army slot y2 in y4]
+!!VRy3&y3>y4:Sy4; [If more darts than monsters, make equal to monsters]
+!!HE-1&y1=5:C0/y2/?y5/d0; [Store TYPE of monsters found in hero's army slot y2 in y5]
+!!IF&y1=5/y4=0:M^Это ЛОВУШКА! Из сундука вылетели отравленные дротики, и только чудом никого не задели.^;
+!!VRy6&y1=5:Sy3 *65536 +y5; [Store type/number of monsters for message display purposes in y6]
+!!UN&y1=5/y4>0:N3/z304/y5/1; [Store monster name (plural) in z304]
+!!IF&y1=5/y4>0:Q1/21/y6/1^Это ЛОВУШКА! Из сундука вылетели отравленные дротики и убили %Y3 из %Z303 ваших %Z304!^;
+!!VRy3&y1=5:*-1; [Change y3 into a negative value]
+!!HE-1&y1=5/y4>0:C0/y2/d0/dy3; [Remove y3 troops killed by darts]
+
+------------------------------------------------------------------------------------------
+
+!?FU1104;  [Start of monster result Function]
+
+!!FU1105:P;    [Get monster # Function]
+!!VRy1:S1 T6;  [Set y1 to random number from 1 to 7 - number of monsters that appear]
+!!VRy2:Sy1 *65536 +v300; [Set y2 to monster type/number for message display purposes]
+!!IF:Q1/21/y2/1^После того, как ты столько времени провалялся с удочкой, ты совершенно не готов к случившемуся!^;
+!!HE-1:Tv998/v999/v1000/v300/y1;  [Start a battle with hero vs y1 of type v300 monsters]
+
+------------------------------------------------------------------------------------------
+
+!?FU1105;  [Start of get monster # Function]
+
+!!VRv300:S0 T144;  [Generate random number from 0-144 for monster]
+!!FU1105&v300=122:P;  [If monster # doesn't exist get a new #]
+!!FU1105&v300=124:P;  [If monster # doesn't exist get a new #]
+!!FU1105&v300=126:P;  [If monster # doesn't exist get a new #]
+!!FU1105&v300=128:P;  [If monster # doesn't exist get a new #]
+
+** End of Script **

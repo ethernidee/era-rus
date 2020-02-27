@@ -1,0 +1,113 @@
+ZVSE
+!#IF:V888/0;
+!#IF:V889/0;
+!#IF:V890/0;
+
+!?OB63/20/0;
+!!IF:V1/0;
+!!IF&-889:Q1^ƒвери этого дома широко открыты. ¬ы чувствуете что-то нехорошее внутри этого здани€. ¬ы рискнете загл€нуть туда?^;
+!!IF&1/-889:M^ ак только вы просунули голову в двери, вы почувствовали противный запах, и увидели  группу странных созданий и людей.
+ќни атакуют!^;
+!!IF&-1:M^¬ы оставл€ете посещение этого здани€ другому искателю приключений и уходите.^;
+
+!!IF:V890/0;
+!!IF&-889:V888/1;
+!!HE-1:R4/0;
+!!HE-1&1:T63/20/0/74/1; (provoke battle)
+!!HE-1:R4/-1;
+
+!!OW:A-1/?y1;
+
+!!IF&-888:M^ƒом пуст, но здесь есть следы битвы.^;
+!!FU2&y1=0/888:P;
+
+!?FU2;
+!!IF:Q1^ѕосле битвы, ¬ы обыскиваете дом и находите странный плащ и кольцо.  ольцо выгл€дит магическим, но это не означает его безопасность, и вы вр€д ли сможете сн€ть его после одевани€. ¬ы рискнете надеть его?^;
+
+!!IF&1:M^ ак только вы надели кольцо, вы почувствовали головокружение, и на секунду потер€ли сознание.  огда вы очнулись, вы почувствовали себ€ более сильным, но никудышным магом!^;
+!!HE-1&1:Fd3/d3/d-2/d-2;
+
+!!IF:V888/0;
+!!IF:V889/1;
+
+!?BA0;
+!!FU4&888:P;
+
+!?FU4;
+!!BA:B12; (subterrean background)
+!!BA:H1/94; (setup defending hero)
+
+!?BF&888;
+!!BF&888:C; (clear battlefield)
+!!BU&-890:S34/1/15/1/-1/0;
+!!BU&-890:S6/1/49/1/-1/0;
+!!BU&-890:S63/1/151/1/-1/0;
+!!BU&-890:S64/1/185/1/-1/0; (summon stacks)
+!!IF:V890/1;
+
+!?BR;
+!!FU11&888/v997=0:P;
+
+!?FU11;
+!!VRv1:S0;
+!!VRv2:S0;
+!!DO1/20/28/1:P34;   (loop through all stacks)
+!!BMv2&v1<>0:M29/99/2; (cast Fire Shield on mage)
+
+!!VRv1:S0;
+!!VRv2:S0;
+
+!!DO1/20/28/1:P64;   (loop through all stacks)
+!!BMv2&v1<>0:M46/2/99; (cast Stone Skin on lich)
+
+!?FU1;
+!!VRy2:S0;
+!!BMx16:T?y1; (Get creature)
+!!BMx16&y1=x1:N?y2; (Get number)
+!!BMx16&y2=1/y1=x1:P?v1; (Get position)
+!!VRv2&y2=1/y1=x1:Sx16;
+
+!?BG;
+!!FU12&888:P;
+
+!?FU12;
+!!VRy1:S0;
+!!VRy2:S-1;
+!!VRy3:S0;
+!!VRy4:S0;
+!!VRy5:S20;
+
+!!BG:A?y1;  (get type of action taken)
+!!BG&y1=7:D?v32; (get target)
+!!BG&y1=7/v32><-1:N?v30; (get stack that shot)
+!!BMv30&y1=7/v32><-1:T?y4; (get what type of creature that shot)
+!!VRy5&y1=7/v32><-1/y4=74:T6;
+!!VRv20:C15/42/45/47/50/52/54;
+!!VRv31&y1=7/v32><-1/y4=74:Svy5;
+!!IF&y1=7/v32><-1/y4=74:V887/1;
+
+!?BG1&887;
+!!BMv30&v31<>15:Cv31/v32/1/5/1;  (cast spell-not Magic Arrow)
+!!BMv30&v31=15:Cv31/v32/1/1/1;  (cast Magic Arrow)
+!!BG:N?y1;  (current stack)
+!!BMy1:C2/v31/0/0/0;  (void spell to restore correct creatures turn)
+!!VRv30:S0;
+!!VRv31:S0;
+!!VRv32:S0;
+!!IF:V887/0;
+
+!?BA&889;
+!!IF:V886/1;
+
+!?BR&886/889/v997=0;
+!!DO3/0/7/1:P;
+!!DO3/20/28/1:P; (loop through all stacks)
+!!IF:V886/1;
+
+!?FU3;
+!!VRy1:S0;
+!!VRy2:S0;
+!!VRy3:S0;
+!!BMx16:T?y1; (get type of creature)
+!!BMx16&y1=34:N?y2; (get number if it was a mage stack)
+!!BMx16&y2<>0:M29/99/2; (cast fire shield on themselves)

@@ -1,0 +1,173 @@
+ZVSE
+
+************************
+*** Magic Mushrooms  ***
+***     By Bruno     ***
+***       V1.10f     ***
+************************
+IA support 10e
+This version is working well 10.d
+Thanks To Donald for his suggestions and his help
+
+When you visit the Mushroom, your hero gains Expert level in
+one of the four schools of magic for the rest of the week.
+This works even if your hero has all eight skill slots filled.
+
+Uses timer 10 and Functions 10-12
+Uses v1-v2-v3 just for local use
+Uses w20-w27 to track hero visits to mushrooms and previous skill levels
+Uses z10-z17 for hint texts and z18 as a local variable
+
+*** Init for amm mushroom
+!#TM10:S1/999/7/255; launch timer every 7 days for all players
+
+*** Init for Magic Water Mushroom
+!#VRz10:S^Гриб Магии Воды (Не посещено)^;
+!#VRz11:S^Гриб Магии Воды (Посещено)^;
+!#HT63/18:W21/0/10;  Rename all Magic Water mushromm
+!#HT63/18:W21/1/11;  call z11 string if mushroom was visited
+*** Init for Magic Fire Mushroom
+!#VRz12:S^Гриб Магии Огня (Не посещено)^;
+!#VRz13:S^Гриб Магии Огня (Посещено)^;
+!#HT63/29:W23/0/12;  Rename all Magic Fire mushromm
+!#HT63/29:W23/1/13;  call z13 string if mushroom was visited
+*** Init for Magic Earth Mushroom
+!#VRz14:S^Гриб Магии Земли (Не посещено)^;
+!#VRz15:S^Гриб Магии Земли (Посещено)^;
+!#HT63/30:W25/0/14;  Rename all Magic Earth mushromm
+!#HT63/30:W25/1/15;  call z15 string if mushroom was visited
+*** Init for Magic Air Mushroom
+!#VRz16:S^Гриб Магии Воздуха (Не посещено)^;
+!#VRz17:S^Гриб Магии Воздуха (Посещено)^;
+!#HT63/14:W27/0/16;  Rename all Magic Air mushromm
+!#HT63/14:W27/1/17;  call z17 string if mushroom was visited
+
+*** Timer
+!?TM10;
+!!OW:C?v1; [get current player]
+!!DO10/0/155/1:P;
+
+** function to check one hero for variable resetting
+!?FU10;
+!!HEx16:O?v2; [get owner of this hero if any]
+!!FU11&v1=v2:P; [continue if it's this player's turn]
+
+*** Function to reset variable
+!?FU11;
+!!IF:Wx16;
+*** water
+!!HEx16&w21=1:S16/w20;
+!!VRw20:S0; [reinstate old skill level if visited mushroom]
+!!VRw21:S0; free the visit
+*** Fire
+!!HEx16&w23=1:S14/w22;
+!!VRw22:S0; [reinstate old skill level if visited mushroom]
+!!VRw23:S0; free the visit
+*** Earth
+!!HEx16&w25=1:S17/w24;
+!!VRw24:S0; [reinstate old skill level if visited mushroom]
+!!VRw25:S0; free the visit
+*** Air
+!!HEx16&w27=1:S15/w26;
+!!VRw26:S0; [reinstate old skill level if visited mushroom]
+!!VRw27:S0; free the visit
+
+*** Magic Water Mushroom ***
+!?OB63/18;
+!!VRv1:S0;
+!!IF:W-1;
+!!HE-1&w21<>1/v1<>3:S16/?v1; ask skill
+!!IF&v1=3/1000:Q1/20/53/1^{Гриб Магии Воды}
+
+Гриб Магии Воды делает вас Экспертом в Магии Воды до конца недели...
+
+Если вы уже Эксперт в Магии Воды, Гриб ничего не может сделать для вас.^;
+!!IF&w21=1/1000:M^{Гриб Магии Воды}
+
+Вы уже посещали Гриб Магии Воды на этой неделе
+Попытайтесь снова на следующей неделе.^;
+!!VRw20&v1<>3/w21<>1:Sv1; w20 stock the level of the skill
+!!IF&v1<>3/w21<>1/1000:Q1/20/53/1^{Гриб Магии Воды}
+
+Гриб Магии Воды делает вас Экспертом в Магии Воды до конца недели...
+
+Вы вдохнули споры магического гриба...
+
+Вы научились Экспертной Магии Воды!^;
+!!HE-1&v1<>3:S16/3; put skill in expert
+!!VRw21&v1<>3:S1; heroes have visited the magic water mushroom
+
+*** Magic Fire Mushrooms ***
+!?OB63/29;
+!!VRv1:S0;
+!!IF:W-1;
+!!HE-1&w23<>1/v1<>3:S14/?v1;
+!!IF&v1=3/1000:Q1/20/47/1^{Гриб Магии Огня}
+
+Гриб Магии Огня делает вас Экспертом в Магии Огня до конца недели...
+
+Если вы уже Эксперт в Магии Огня, Гриб ничего не может сделать для вас.^;
+!!IF&w23=1/1000:M^{Гриб Магии Огня}
+
+Вы уже посещали Гриб Магии Огня на этой неделе
+Попытайтесь снова на следующей неделе.^;
+!!VRw22&v1<>3/w23<>1:Sv1; w22 stock the level of the skill
+!!IF&v1<>3/w23<>1/1000:Q1/20/47/1^{Гриб Магии Огня}
+
+Гриб Магии Огня делает вас Экспертом в Магии Огня до конца недели...
+
+Вы вдохнули споры магического гриба...
+
+Вы научились Экспертной Магии Огня!^;
+!!HE-1&v1<>3:S14/3; put skill in expert
+!!VRw23&v1<>3:S1; heroes have visited the magic mushroom
+
+*** Magic Earth Mushrooms ***
+!?OB63/30;
+!!VRv1:S0;
+!!IF:W-1;
+!!HE-1&w25<>1/v1<>3:S17/?v1;
+!!IF&v1=3/1000:Q1/20/56/1^{Гриб Магии Земли}
+
+Гриб Магии Земли делает вас Экспертом в Магии Земли до конца недели...
+
+Если вы уже Эксперт в Магии Земли, Гриб ничего не может сделать для вас.^;
+!!IF&w25=1/1000:M^{Гриб Магии Земли}
+
+Вы уже посещали Гриб Магии Земли на этой неделе
+Попытайтесь снова на следующей неделе.^;
+!!VRw24&v1<>3/w25<>1:Sv1; w22 stock the level of the skill
+!!IF&v1<>3/w25<>1/1000:Q1/20/56/1^{Гриб Магии Земли}
+
+Гриб Магии Земли делает вас Экспертом в Магии Земли до конца недели...
+
+Вы вдохнули споры магического гриба...
+
+Вы научились Экспертной Магии Земли!^;
+!!HE-1&v1<>3:S17/3; put skill in expert
+!!VRw25&v1<>3:S1; heroes have visited the magic mushroom
+
+*** Magic Air Mushrooms ***
+!?OB63/14;
+!!VRv1:S0;
+!!IF:W-1;
+!!HE-1&w27<>1/v1<>3:S15/?v1;
+!!IF&v1=3/1000:Q1/20/50/1^{Гриб Магии Воздуха}
+
+Гриб Магии Воздуха делает вас Экспертом в Магии Воздуха до конца недели...
+
+Если вы уже Эксперт в Магии Воздуха, Гриб ничего не может сделать для вас.^;
+!!IF&w27=1/1000:M^{Гриб Магии Воздуха}
+
+Вы уже посещали Гриб Магии Воздуха на этой неделе
+Попытайтесь снова на следующей неделе.^;
+!!VRw26&v1<>3/w27<>1:Sv1; w22 stock the level of the skill
+!!IF&v1<>3/w27<>1/1000:Q1/20/50/1^{Гриб Магии Воздуха}
+
+Гриб Магии Воздуха делает вас Экспертом в Магии Воздуха до конца недели...
+
+Вы вдохнули споры магического гриба...
+
+Вы научились Экспертной Магии Воздуха!^;
+!!HE-1&v1<>3:S15/3; put skill in expert
+!!VRw27&v1<>3:S1; heroes have visited the magic mushroom
