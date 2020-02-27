@@ -1,7 +1,7 @@
 {
 	"caption": {
 		"Cn_Simp": "",
-		"en_US": "WoG Russification",
+		"en_US": "WoG Rus",
 		"ru_RU": "Русификация «Во Имя Богов»"
 	},
 	"description": {
@@ -31,5 +31,5 @@
 	"platform": "era",
 	"info_version": "2.9.12",
 	"plugins": {},
-	"category": ""
+	"category": "gameplay"
 }
